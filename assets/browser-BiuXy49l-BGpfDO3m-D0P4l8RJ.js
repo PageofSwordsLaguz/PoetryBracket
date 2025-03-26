@@ -1,0 +1,1 @@
+import{l as o}from"./index-DXoki0Jt.js";var e,t;function r(){return t||(t=1,e=function(){throw new Error("ws does not work in the browser. Browser clients must use the native WebSocket object")}),e}var n=r();const s=o(n),l=Object.freeze(Object.defineProperty({__proto__:null,default:s},Symbol.toStringTag,{value:"Module"}));export{l as b};
