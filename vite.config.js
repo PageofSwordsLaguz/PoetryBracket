@@ -3,6 +3,6 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
-  base: '/PoetryBracket/', // This should match your repository name
+  base: '/PoetryBracket/',  // Ensure this matches your repo name on GitHub
 });
 

@@ -71,12 +71,14 @@ export default function VotingPage() {
     if (newMatchups.filter((matchup) => matchup.winner_id).length === newMatchups.length) {
       // Move to the next round if all matchups have winners
       if (currentRound < 4) {
+        console.log("Advancing to next round:", currentRound + 1);
         setCurrentRound(currentRound + 1);
       }
     }
   };
 
   useEffect(() => {
+    console.log("Fetching data for round:", currentRound);
     fetchMatchupsAndPoems();
     const interval = setInterval(checkIfVotingClosed, 10000); // Check every 10 seconds
     return () => clearInterval(interval); // Clean up the interval on component unmount
