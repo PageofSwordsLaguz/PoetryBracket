@@ -54,7 +54,9 @@ export default function VotingPage() {
   const checkIfVotingClosed = () => {
     const roundEndTime = new Date(roundEndTimes[currentRound]);
     const currentTime = new Date();
-    setIsVotingClosed(currentTime >= roundEndTime);
+    const votingClosed = currentTime >= roundEndTime;
+    setIsVotingClosed(votingClosed);
+    console.log(`Round ${currentRound} voting closed:`, votingClosed);
   };
 
   const handleVote = async (matchupIndex, winner) => {
@@ -81,6 +83,8 @@ export default function VotingPage() {
       if (currentRound < 4) {
         console.log("Advancing to next round:", currentRound + 1);
         setCurrentRound(prevRound => prevRound + 1);
+      } else {
+        console.log("All rounds have been completed.");
       }
     }
   };
