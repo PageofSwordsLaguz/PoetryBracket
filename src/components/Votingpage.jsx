@@ -4,7 +4,9 @@ import './Votingpage.css'; // Import your CSS file here
 import { Button, Spinner } from "react-bootstrap";
 
 // Initialize Supabase
-const supabase = createClient("https://keuqsxtdibgvyyocdnhj.supabase.co", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtldXFzeHRkaWJndnl5b2NkbmhqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDI3NTc1NzEsImV4cCI6MjA1ODMzMzU3MX0.adtOrJ6PU3TTybfGcJpbTbR6zFHfHApzOUN0_ouS33I");
+const supabaseUrl = "https://keuqsxtdibgvyyocdnhj.supabase.co";
+const supabaseKey = "your-supabase-key";
+const supabase = createClient(supabaseUrl, supabaseKey);
 
 const roundEndTimes = {
   1: '2025-03-27T17:30:00Z', // Round 1 end time (in UTC)
@@ -35,6 +37,9 @@ export default function VotingPage() {
         .eq("round", currentRound);
 
       if (matchupsError) throw new Error(matchupsError.message);
+
+      console.log("Poems data:", poems);
+      console.log("Matchups data:", matchups);
 
       setPoems(poems);
       setMatchups(matchups);
