@@ -73,11 +73,14 @@ export default function VotingPage() {
     setMatchups(newMatchups);
 
     // Check if we can move to the next round
-    if (newMatchups.filter((matchup) => matchup.winner_id).length === newMatchups.length) {
+    const allMatchupsHaveWinners = newMatchups.every(matchup => matchup.winner_id);
+    console.log("All matchups have winners:", allMatchupsHaveWinners);
+
+    if (allMatchupsHaveWinners) {
       // Move to the next round if all matchups have winners
       if (currentRound < 4) {
         console.log("Advancing to next round:", currentRound + 1);
-        setCurrentRound(currentRound + 1);
+        setCurrentRound(prevRound => prevRound + 1);
       }
     }
   };
