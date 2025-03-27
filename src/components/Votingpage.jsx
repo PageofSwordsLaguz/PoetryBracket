@@ -10,7 +10,7 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 
 const roundEndTimes = {
   1: '2025-03-27T17:30:00Z', // Round 1 end time (in UTC)
-  2: '2025-03-27T21:30:00Z', // Round 2 end time (in UTC)
+  2: '2025-03-27T24:30:00Z', // Round 2 end time (in UTC)
   3: '2025-03-28T15:30:00Z', // Round 3 end time (in UTC)
   4: '2025-03-28T17:30:00Z', // Round 4 end time (in UTC)
 };
@@ -64,12 +64,19 @@ export default function VotingPage() {
     newMatchups[matchupIndex].winner_id = winner;
 
     // Update matchups in the database
-    const { data, updateError } = await supabase
-      .from('Matchups')
-      .upsert(newMatchups);
+    try {
+      const { data, error } = await supabase
+        .from('Matchups')
+        .update({ winner_id: winner })
+        .eq('id', newMatchups[matchupIndex].id);
 
-    if (updateError) {
-      console.error("Error updating matchups:", updateError.message);
+      if (error) {
+        throw new Error(error.message);
+      }
+
+      console.log("Matchup updated successfully:", data);
+    } catch (error) {
+      console.error("Error updating matchups:", error.message);
     }
 
     setMatchups(newMatchups);
